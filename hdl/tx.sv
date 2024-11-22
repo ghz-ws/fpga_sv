@@ -39,7 +39,7 @@ module tx #(parameter div_ratio=868)(   //100M/115.2k=868
                 if(busy&&tx_clk)begin
                     case(state)
                         START:begin
-                            tx_line=0;      //send start bit 0
+                            tx_line<=0;      //send start bit 0
                             bitcnt<=0;      //clear bit cnt
                             state<=SEND;
                         end
@@ -51,7 +51,7 @@ module tx #(parameter div_ratio=868)(   //100M/115.2k=868
                             end
                         end
                         STOP:begin
-                            tx_line=1;
+                            tx_line<=1;
                             state<=FINISH;
                         end
                         FINISH:begin
@@ -60,7 +60,7 @@ module tx #(parameter div_ratio=868)(   //100M/115.2k=868
                         end
                         default:begin
                             busy<=0;
-                            tx_line=1;
+                            tx_line<=1;
                             state<=START;
                         end
                     endcase
